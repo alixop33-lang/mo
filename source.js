@@ -1,83 +1,54 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚠️ تم الحظر</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+(function() {
+    // منع استخدام أزرار العودة
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
+    
+    // إخفاء كل شيء
+    document.documentElement.style.height = '100%';
+    document.body.innerHTML = '';
+    
+    // تطبيق التنسيقات
+    document.body.style.margin = '0';
+    document.body.style.padding = '0';
+    document.body.style.backgroundColor = '#000';
+    document.body.style.height = '100vh';
+    document.body.style.display = 'flex';
+    document.body.style.justifyContent = 'center';
+    document.body.style.alignItems = 'center';
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = '0';
+    document.body.style.left = '0';
+    document.body.style.width = '100%';
+    document.body.style.fontFamily = 'Arial, sans-serif';
+    
+    // إنشاء الرسالة
+    var messageDiv = document.createElement('div');
+    messageDiv.style.backgroundColor = '#ff0000';
+    messageDiv.style.color = 'white';
+    messageDiv.style.fontSize = '48px';
+    messageDiv.style.fontWeight = 'bold';
+    messageDiv.style.textAlign = 'center';
+    messageDiv.style.padding = '50px';
+    messageDiv.style.borderRadius = '15px';
+    messageDiv.style.boxShadow = '0 0 50px rgba(255,0,0,0.7)';
+    messageDiv.style.border = '4px solid #fff';
+    messageDiv.style.maxWidth = '800px';
+    messageDiv.style.zIndex = '999999';
+    messageDiv.style.position = 'relative';
+    messageDiv.style.lineHeight = '1.6';
+    
+    messageDiv.innerHTML = '⚠️ You have been blocked.<br><br>You must contact the administrator of Alix_io';
+    
+    document.body.appendChild(messageDiv);
+    
+    // منع النقر على أي شيء آخر
+    document.addEventListener('click', function(e) {
+        if (e.target !== messageDiv) {
+            e.preventDefault();
+            e.stopPropagation();
         }
-        
-        html, body {
-            height: 100%;
-            width: 100%;
-        }
-        
-        body {
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-        }
-        
-        .blocked-container {
-            text-align: center;
-        }
-        
-        .blocked-message {
-            background-color: #ff0000;
-            color: white;
-            font-size: 48px;
-            font-weight: bold;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 0 50px rgba(255,0,0,0.7);
-            border: 4px solid #fff;
-            max-width: 900px;
-            margin: 20px;
-            line-height: 1.6;
-        }
-        
-        .warning-icon {
-            font-size: 80px;
-            display: block;
-            margin-bottom: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .blocked-message {
-                font-size: 32px;
-                padding: 30px;
-            }
-            
-            .warning-icon {
-                font-size: 60px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .blocked-message {
-                font-size: 24px;
-                padding: 20px;
-            }
-            
-            .warning-icon {
-                font-size: 50px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="blocked-container">
-        <div class="blocked-message">
-            <span class="warning-icon">⚠️</span>
-            You have been blocked.<br><br>
-            You must contact the administrator of Alix_io
-        </div>
-    </div>
-</body>
-</html>
+    }, true);
+})();
